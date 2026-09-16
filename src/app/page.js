@@ -36,13 +36,14 @@ export default async function Home({ searchParams }) {
   let error = null;
 
   try {
-    [campaigns, trendRows, ads, keywords, countriesByCampaign] = await Promise.all([
-      getCampaignPerformance(dateRange),
-      getDailyTrend(dateRange),
-      getAdCreatives(dateRange),
-      getKeywords(dateRange),
-      getCampaignCountries(),
-    ]);
+    [campaigns, trendRows, ads, keywords, countriesByCampaign] =
+      await Promise.all([
+        getCampaignPerformance(dateRange),
+        getDailyTrend(dateRange),
+        getAdCreatives(dateRange),
+        getKeywords(dateRange),
+        getCampaignCountries(),
+      ]);
   } catch (e) {
     error = e.message;
   }
@@ -69,7 +70,7 @@ export default async function Home({ searchParams }) {
 
   if (countryFilter) {
     enrichedCampaigns = enrichedCampaigns.filter((c) =>
-      countriesByCampaign.get(c.id)?.has(countryFilter)
+      countriesByCampaign.get(c.id)?.has(countryFilter),
     );
     const allowedIds = new Set(enrichedCampaigns.map((c) => c.id));
     filteredTrendRows = trendRows.filter((r) => allowedIds.has(r.campaignId));
@@ -80,7 +81,7 @@ export default async function Home({ searchParams }) {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Google Ads Dashboard</h1>
+        <h1 className={styles.title}>Googlee Ads Dashboard</h1>
       </header>
 
       <DashboardApp tabs={tabs} dateRange={dateRange} country={countryFilter} />

@@ -54,7 +54,7 @@ function Preview({ channelType, ads }) {
       return (
         <div className={styles.textPreview}>
           <span className={styles.textPreviewQuote}>&ldquo;</span>
-          {ad.headlines[0].text}
+          {ad.headlines[0]}
         </div>
       );
     }
@@ -102,7 +102,9 @@ export default function CampaignCard({ campaign, variant }) {
             </>
           )}
           <Metric label="Cost" value={formatMoney(campaign.cost)} />
-          <Metric label="Conversions" value={formatNumber(campaign.conversions)} />
+          {campaign.conversions > 0 && (
+            <Metric label="Conversions" value={formatNumber(campaign.conversions)} />
+          )}
         </div>
 
         {hasDrilldownContent(campaign) && (

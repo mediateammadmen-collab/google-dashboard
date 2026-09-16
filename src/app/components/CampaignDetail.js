@@ -48,24 +48,16 @@ function AdCopyList({ ads }) {
         <div key={ad.adId} className={styles.adCard}>
           <AdMeta ad={ad} />
           <div className={styles.chipGroup}>
-            {ad.headlines.map((h, i) => (
-              <span
-                key={i}
-                className={`${styles.chip} ${h.approved ? "" : styles.chipDisapproved}`}
-                title={h.approved ? "Approved" : "Disapproved"}
-              >
-                {h.text}
+            {ad.headlines.map((text, i) => (
+              <span key={i} className={styles.chip}>
+                {text}
               </span>
             ))}
           </div>
           <div className={styles.chipGroup}>
-            {ad.descriptions.map((d, i) => (
-              <span
-                key={i}
-                className={`${styles.chip} ${styles.chipDescription} ${d.approved ? "" : styles.chipDisapproved}`}
-                title={d.approved ? "Approved" : "Disapproved"}
-              >
-                {d.text}
+            {ad.descriptions.map((text, i) => (
+              <span key={i} className={`${styles.chip} ${styles.chipDescription}`}>
+                {text}
               </span>
             ))}
           </div>

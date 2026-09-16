@@ -174,14 +174,8 @@ export async function getAdCreatives(dateRange) {
       campaignId: row.campaign.id,
       adId: ad.id,
       status: row.adGroupAd.status,
-      headlines: (ad.responsiveSearchAd?.headlines ?? []).map((h) => ({
-        text: h.text,
-        approved: h.policySummaryInfo?.approvalStatus !== "DISAPPROVED",
-      })),
-      descriptions: (ad.responsiveSearchAd?.descriptions ?? []).map((d) => ({
-        text: d.text,
-        approved: d.policySummaryInfo?.approvalStatus !== "DISAPPROVED",
-      })),
+      headlines: (ad.responsiveSearchAd?.headlines ?? []).map((h) => h.text),
+      descriptions: (ad.responsiveSearchAd?.descriptions ?? []).map((d) => d.text),
       videoAssetResourceName,
       imageAssetResourceName,
       impressions: Number(row.metrics.impressions ?? 0),

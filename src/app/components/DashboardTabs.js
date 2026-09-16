@@ -26,7 +26,9 @@ export default function DashboardTabs({ tabs, selectedKey }) {
         <StatTile label="Spend" value={formatMoney(active.totals.cost)} />
         <StatTile label="Impressions" value={formatCompact(active.totals.impressions)} />
         <StatTile label="Clicks" value={formatCompact(active.totals.clicks)} />
-        <StatTile label="Conversions" value={formatCompact(active.totals.conversions)} />
+        {active.totals.conversions > 0 && (
+          <StatTile label="Conversions" value={formatCompact(active.totals.conversions)} />
+        )}
       </section>
 
       <section className={styles.charts}>

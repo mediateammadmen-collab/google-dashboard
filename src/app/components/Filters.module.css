@@ -39,8 +39,3 @@
   outline: 2px solid var(--series-1);
   outline-offset: 1px;
 }
-
-.select:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}

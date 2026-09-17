@@ -7,7 +7,8 @@ import {
 } from "@/lib/googleAds";
 import { buildBrandTabs } from "@/lib/campaignGrouping";
 import { resolveDateRange } from "@/lib/dateRange";
-import DashboardApp from "./components/DashboardApp";
+import Filters from "./components/Filters";
+import CampaignOverview from "./components/CampaignOverview";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -76,15 +77,17 @@ export default async function Home({ searchParams }) {
     filteredTrendRows = trendRows.filter((r) => allowedIds.has(r.campaignId));
   }
 
-  const tabs = buildBrandTabs(enrichedCampaigns, filteredTrendRows);
+  const [gnext] = buildBrandTabs(enrichedCampaigns, filteredTrendRows);
 
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Googlee Ads Dashboard</h1>
+        <h1 className={styles.title}>Gnext Google Ads Dashboard</h1>
       </header>
 
-      <DashboardApp tabs={tabs} dateRange={dateRange} country={countryFilter} />
+      <Filters dateRange={dateRange} country={countryFilter} />
+
+      <CampaignOverview tab={gnext} />
     </main>
   );
 }

@@ -72,6 +72,10 @@ function whereClause(...conditions) {
   return parts.length > 0 ? `WHERE ${parts.join(" AND ")}` : "";
 }
 
+// This dashboard is scoped to the Gnext client only - the account also runs
+// unrelated Jac and MGI campaigns that should never be fetched or shown here.
+const GNEXT_FILTER = `campaign.name LIKE 'Gnext%'`;
+
 export async function getCampaignPerformance(dateRange) {
   const rows = await gaqlSearch(`
     SELECT
@@ -85,7 +89,7 @@ export async function getCampaignPerformance(dateRange) {
       metrics.conversions,
       metrics.video_trueview_views
     FROM campaign
-    ${whereClause(dateRangeClause(dateRange))}
+    ${whereClause(GNEXT_FILTER, dateRangeClause(dateRange))}
     ORDER BY metrics.cost_micros DESC
   `);
 
@@ -115,7 +119,7 @@ export async function getDailyTrend(dateRange) {
       metrics.cost_micros,
       metrics.conversions
     FROM campaign
-    ${whereClause(dateRangeClause(dateRange))}
+    ${whereClause(GNEXT_FILTER, dateRangeClause(dateRange))}
     ORDER BY segments.date ASC
   `);
 
@@ -153,7 +157,7 @@ export async function getAdCreatives(dateRange) {
       metrics.youtube_shares,
       metrics.youtube_comments
     FROM ad_group_ad
-    ${whereClause(dateRangeClause(dateRange))}
+    ${whereClause(GNEXT_FILTER, dateRangeClause(dateRange))}
     ORDER BY metrics.cost_micros DESC
   `);
 
@@ -235,7 +239,11 @@ export async function getKeywords(dateRange) {
       metrics.cost_micros,
       metrics.conversions
     FROM keyword_view
-    ${whereClause("campaign.advertising_channel_type = SEARCH", dateRangeClause(dateRange))}
+    ${whereClause(
+      "campaign.advertising_channel_type = SEARCH",
+      GNEXT_FILTER,
+      dateRangeClause(dateRange)
+    )}
     ORDER BY metrics.clicks DESC
   `);
 
@@ -259,7 +267,9 @@ export async function getCampaignCountries() {
       campaign.id,
       campaign_criterion.location.geo_target_constant
     FROM campaign_criterion
-    WHERE campaign_criterion.type = LOCATION AND campaign_criterion.negative = false
+    WHERE campaign_criterion.type = LOCATION
+      AND campaign_criterion.negative = false
+      AND ${GNEXT_FILTER}
   `);
 
   const geoIdsByCampaign = new Map();

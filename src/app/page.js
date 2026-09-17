@@ -87,6 +87,14 @@ export default async function Home({ searchParams }) {
       <header className={styles.header}>
         <h1 className={styles.title}>Gnext Google Ads Dashboard</h1>
         <div className={styles.headerActions}>
+          <a
+            href="https://gnext-report.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonStyles.button}
+          >
+            Meta report
+          </a>
           <Link href="/week-comparison" className={buttonStyles.button}>
             Compare weeks
           </Link>

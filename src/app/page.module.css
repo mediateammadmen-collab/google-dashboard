@@ -23,6 +23,12 @@
   color: var(--text-primary);
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .error {
   color: var(--status-critical);
   font-size: 0.9rem;

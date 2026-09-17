@@ -1,0 +1,82 @@
+.row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gridline);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  border: 1px solid var(--gridline);
+}
+
+.badgeUp {
+  color: var(--status-good);
+  border-color: var(--status-good);
+}
+
+.badgeDown {
+  color: var(--status-critical);
+  border-color: var(--status-critical);
+}
+
+.barLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 92px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--gridline);
+  overflow: hidden;
+}
+
+.fillWeek1 {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--series-1);
+}
+
+.fillWeek2 {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--series-violet);
+}

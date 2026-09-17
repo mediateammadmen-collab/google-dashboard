@@ -300,3 +300,25 @@ export async function getCampaignCountries() {
   }
   return countryCodesByCampaign;
 }
+
+// Account-wide totals for one date range, optionally scoped to a country -
+// used by the week-on-week comparison view.
+export async function getGnextTotals(dateRange, countryCode = null) {
+  let campaigns = await getCampaignPerformance(dateRange);
+
+  if (countryCode) {
+    const countriesByCampaign = await getCampaignCountries();
+    campaigns = campaigns.filter((c) => countriesByCampaign.get(c.id)?.has(countryCode));
+  }
+
+  return campaigns.reduce(
+    (acc, c) => {
+      acc.impressions += c.impressions;
+      acc.clicks += c.clicks;
+      acc.cost += c.cost;
+      acc.videoViews += c.videoViews;
+      return acc;
+    },
+    { impressions: 0, clicks: 0, cost: 0, videoViews: 0 }
+  );
+}

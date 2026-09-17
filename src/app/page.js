@@ -7,9 +7,11 @@ import {
 } from "@/lib/googleAds";
 import { buildBrandTabs } from "@/lib/campaignGrouping";
 import { resolveDateRange } from "@/lib/dateRange";
+import Link from "next/link";
 import Filters from "./components/Filters";
 import CampaignOverview from "./components/CampaignOverview";
 import RefreshButton from "./components/RefreshButton";
+import buttonStyles from "./components/RefreshButton.module.css";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -84,7 +86,12 @@ export default async function Home({ searchParams }) {
     <main className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>Gnext Google Ads Dashboard</h1>
-        <RefreshButton />
+        <div className={styles.headerActions}>
+          <Link href="/week-comparison" className={buttonStyles.button}>
+            Compare weeks
+          </Link>
+          <RefreshButton />
+        </div>
       </header>
 
       <Filters dateRange={dateRange} country={countryFilter} />

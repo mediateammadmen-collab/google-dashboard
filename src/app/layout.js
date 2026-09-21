@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Google Ads Dashboard",
   description: "Campaign performance overview",
+  verification: {
+    google: '4eah9aG58qRPF8602e99d51ZqUG1T3fSIvqRe5dIQjs',
+  },
 };
 
 export default function RootLayout({ children }) {
